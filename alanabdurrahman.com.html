@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alan Abdurrahman - Senior Producer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Custom Styles - Minimalist Black & White Theme with Pulsing Yellow Accent */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0F0F0F;
+            color: #E0E0E0;
+            scroll-behavior: smooth; /* Ensures smooth scroll for all hash links if JS fails or for other links */
+            overflow-x: hidden;
+        }
+
+        /* Pulsing Gradient Animation */
+        @keyframes pulseGradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .pulsing-gradient-text {
+            background: linear-gradient(45deg, #FDE047, #EAB308, #FDE047); /* Diagonal gradient */
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulseGradientAnimation 4s ease-in-out infinite; /* Slowed down */
+            font-weight: 500; /* Medium weight for typing effect text */
+        }
+
+        .pulsing-gradient-bg {
+            background: linear-gradient(45deg, #FDE047, #EAB308, #FDE047); /* Diagonal gradient */
+            background-size: 200% auto;
+            animation: pulseGradientAnimation 4s ease-in-out infinite; /* Slowed down */
+            box-shadow: 0 0 8px rgba(250, 204, 21, 0.3); 
+        }
+        
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column; 
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative; 
+            overflow: hidden; 
+        }
+
+        #particle-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1; 
+        }
+
+        .hero-section::before { /* Static subtle radial gradient for hero background */
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(30, 30, 30, 0.2) 0%, rgba(15, 15, 15, 0.9) 75%);
+            z-index: 0; 
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2; 
+            padding: 1rem; 
+        }
+        
+        .hero-main-title { 
+            font-size: 2.5rem; 
+            line-height: 1.2; 
+            font-weight: 700; 
+            margin-bottom: 1rem; 
+            color: #FFFFFF; 
+        }
+        @media (min-width: 768px) { 
+            .hero-main-title {
+                font-size: 4.5rem; 
+                line-height: 1.1; 
+            }
+        }
+        .hero-subtitle { 
+            font-size: 1.5rem; 
+            min-height: 2.25em; 
+            margin-bottom: 2rem; 
+        }
+        @media (min-width: 768px) { 
+            .hero-subtitle {
+                font-size: 1.875rem; 
+                min-height: 2.25em; 
+            }
+        }
+
+        /* Hero Button Styling */
+        .hero-buttons-container {
+            display: flex;
+            flex-direction: column; 
+            align-items: center; 
+            gap: 1rem; 
+        }
+        @media (min-width: 640px) { 
+            .hero-buttons-container {
+                flex-direction: row; 
+                justify-content: center; 
+                gap: 1rem; 
+            }
+        }
+
+        .hero-button { 
+            padding: 0.75rem 0; 
+            width: 200px; 
+            min-width: 180px; 
+            border-radius: 0.5rem; 
+            font-weight: 600; 
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; 
+            display: inline-flex; 
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+            transform-origin: center;
+            border: 2px solid transparent; 
+            position: relative; 
+            overflow: hidden; 
+        }
+        .hero-button:hover {
+            transform: scale(1.05);
+            background-color: #FFFFFF; 
+            color: #0F0F0F !important; 
+            border-color: #FFFFFF; 
+            background-image: none !important; 
+            box-shadow: 0 6px 12px rgba(255,255,255,0.1); 
+        }
+        .hero-button:hover .pulsing-gradient-text { 
+             -webkit-text-fill-color: #0F0F0F; 
+             background-image: none; 
+        }
+         .hero-button:hover i { 
+            color: #0F0F0F !important; 
+            text-shadow: none; 
+        }
+
+
+        .accent-bg { /* Primary button - View My Work */
+            background-image: linear-gradient(45deg, #FDE047, #EAB308, #FDE047); 
+            background-size: 200% auto;
+            animation: pulseGradientAnimation 4s ease-in-out infinite;
+            color: #0F0F0F; 
+            border: 2px solid #FFFFFF; 
+            background-color: #FACC15; 
+        }
+
+        .secondary-button { /* Secondary button - Get In Touch */
+            background-color: transparent;
+            border: 2px solid #E0E0E0; 
+            color: #E0E0E0; 
+        }
+
+        .section {
+            padding: 80px 0;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .typing-cursor {
+            display: inline-block;
+            width: 3px; 
+            height: 1.2em; 
+            animation: blink 0.7s infinite;
+            margin-left: 2px;
+            vertical-align: bottom;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        nav {
+            transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        nav.scrolled {
+            background-color: rgba(15, 15, 15, 0.9); 
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .nav-link {
+            transition: color 0.3s ease;
+            color: #B0B0B0; 
+            position: relative; 
+        }
+        .nav-link:hover .nav-text-gradient { 
+             background: linear-gradient(45deg, #FDE047, #EAB308, #FDE047); 
+             background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulseGradientAnimation 4s ease-in-out infinite; 
+        }
+
+        .project-card {
+            background-color: #1C1C1C; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            border-radius: 0.75rem; /* Ensure consistent rounding */
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            /* Updated: Centered white glow */
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1); 
+        }
+        .project-card img {
+            transition: transform 0.3s ease;
+        }
+        .project-card:hover img {
+            transform: scale(1.05);
+        }
+        .project-card h3 {
+            color: #FFFFFF; 
+        }
+        .project-card p {
+             color: #A0A0A0; 
+        }
+        .project-card-link { 
+            font-weight: 500; 
+        }
+         .project-card-link:hover .pulsing-gradient-text { 
+            text-decoration: underline;
+        }
+        .project-card-link:hover .icon-yellow { 
+            text-decoration: none; 
+             text-shadow: 0 0 10px rgba(253, 224, 71, 0.7); 
+        }
+
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1C1C1C; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #A0A0A0; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, #FDE047, #EAB308, #FDE047); 
+            background-size: 200% auto;
+            animation: pulseGradientAnimation 4s ease-in-out infinite; 
+        }
+
+        .mobile-menu {
+            background-color: rgba(15, 15, 15, 0.95); 
+            backdrop-filter: blur(10px);
+        }
+        .mobile-menu a:hover { 
+            background-color: #FFFFFF;
+            color: #0F0F0F;
+        }
+        
+        .section-title-underline {
+            width: 80px; 
+            height: 2px; 
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 3rem; 
+            border-radius: 1px;
+        }
+
+        .approach-card, .technical-skill-card { 
+            background-color: #1C1C1C; 
+            padding: 2rem;
+            border-radius: 0.75rem; 
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            text-align: center; 
+            min-height: 200px; 
+        }
+        .approach-card:hover, .technical-skill-card:hover { 
+            transform: translateY(-5px);
+            /* Updated: Centered white glow */
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1); 
+        }
+         .approach-card h3, .technical-skill-card h3 { 
+             color: #FFFFFF;
+             margin-top: 0.75rem; 
+         }
+         .approach-card p { 
+             color: #A0A0A0;
+             margin-top: 0.5rem; 
+         }
+       
+        .client-list span {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin: 0.25rem;
+            background-color: #1C1C1C;
+            border-radius: 0.375rem; 
+            color: #E0E0E0;
+            font-weight: 500;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .client-list span:hover { 
+            background-color: #FFFFFF;
+            color: #0F0F0F;
+        }
+
+        .about-me-container {
+            display: flex;
+            flex-direction: column; 
+            align-items: center;
+            gap: 2rem; 
+        }
+        @media (min-width: 768px) { 
+            .about-me-container {
+                flex-direction: row; 
+                align-items: flex-start; 
+            }
+        }
+        .about-me-image-wrapper {
+            flex-shrink: 0; 
+            width: 200px; 
+            height: 250px; 
+            border-radius: 0.5rem; 
+            overflow: hidden; 
+            padding: 2px; 
+            position: relative;
+        }
+        .about-me-image-wrapper::before { 
+            content: '';
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            z-index: -1; 
+            margin: -2px; 
+            border-radius: inherit; 
+            background: linear-gradient(45deg, #FDE047, #EAB308, #FDE047); 
+            background-size: 200% auto;
+            animation: pulseGradientAnimation 4s ease-in-out infinite; 
+            box-shadow: 0 0 8px rgba(250, 204, 21, 0.3); 
+        }
+
+        .about-me-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            border-radius: 0.375rem; 
+            display: block; 
+        }
+        .about-me-text {
+            flex-grow: 1; 
+            text-align: center; 
+        }
+        @media (min-width: 768px) {
+            .about-me-text {
+                text-align: left; 
+            }
+        }
+
+        .scroll-down-arrow {
+            position: absolute;
+            bottom: 2.5rem; 
+            /* Adjusted translateX for visual centering of chevron */
+            transform: translateX(-51.5%); /* Fine-tuned adjustment based on previous feedback */
+            z-index: 20; 
+        }
+        .scroll-down-arrow i {
+            transition: color 0.3s ease, text-shadow 0.3s ease; 
+        }
+        .scroll-down-arrow:hover i {
+             color: #FDE047; 
+             text-shadow: 0 0 10px rgba(253, 224, 71, 0.7); 
+        }
+        
+        /* Solid yellow color for icons with glow */
+        .icon-yellow {
+            color: #FACC15; /* Tailwind yellow-400 */
+            text-shadow: 0 0 8px rgba(250, 204, 21, 0.5); /* Subtle yellow glow */
+            transition: color 0.3s ease, text-shadow 0.3s ease; 
+        }
+        
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 p-4">
+        <div class="container mx-auto flex justify-between items-center px-4 md:px-0">
+            <a href="#" class="text-2xl font-bold tracking-tight text-white">
+                Alan<span class="nav-logo-dot pulsing-gradient-text">.</span>
+            </a>
+            <div class="hidden md:flex space-x-6">
+                <a href="#about" class="nav-link"><span class="nav-text-gradient">About</span></a>
+                <a href="#experience" class="nav-link"><span class="nav-text-gradient">Approach</span></a>
+                <a href="#technical-expertise" class="nav-link"><span class="nav-text-gradient">Expertise</span></a>
+                <a href="#portfolio" class="nav-link"><span class="nav-text-gradient">Portfolio</span></a>
+                <a href="#contact" class="nav-link"><span class="nav-text-gradient">Contact</span></a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-300 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 right-0 mobile-menu shadow-lg">
+            <a href="#about" class="block py-3 px-6 text-gray-300">About</a>
+            <a href="#experience" class="block py-3 px-6 text-gray-300">Approach</a>
+            <a href="#technical-expertise" class="block py-3 px-6 text-gray-300">Expertise</a>
+            <a href="#portfolio" class="block py-3 px-6 text-gray-300">Portfolio</a>
+            <a href="#contact" class="block py-3 px-6 text-gray-300">Contact</a>
+        </div>
+    </nav>
+
+    <header class="hero-section">
+        <canvas id="particle-canvas"></canvas>
+        <div class="hero-content px-4">
+            <h1 class="hero-main-title"> 
+                Alan Abdurrahman
+            </h1>
+            <p class="hero-subtitle"> 
+                <span id="hero-title" class="pulsing-gradient-text"></span><span class="typing-cursor pulsing-gradient-bg"></span>
+            </p>
+            <div class="hero-buttons-container">
+                <a href="#portfolio" class="hero-button accent-bg">
+                    View My Work
+                </a>
+                <a href="#contact" class="hero-button secondary-button">
+                    Get In Touch
+                </a>
+            </div>
+        </div>
+         <a href="#about" id="scroll-down-link" class="scroll-down-arrow animate-bounce"> 
+            <i class="fas fa-chevron-down icon-yellow"></i> 
+        </a>
+    </header>
+
+    <section id="about" class="section container mx-auto px-6 md:px-12">
+        <h2 class="text-4xl font-bold text-center mb-4 text-white">About Me</h2>
+        <div class="section-title-underline pulsing-gradient-bg"></div>
+        <div class="max-w-4xl mx-auto about-me-container">
+            <div class="about-me-image-wrapper"> 
+                <img src="images/AlanA2025.jpg" alt="A photo of me"> 
+            </div>
+            <div class="about-me-text text-lg md:text-xl leading-relaxed text-gray-300">
+                <p class="mb-6">
+                    Based in <span class="font-semibold pulsing-gradient-text">London</span>, I'm a Senior Producer specialising in transforming complex ideas into <span class="font-semibold pulsing-gradient-text">high-impact visual stories</span>.
+                    With a robust background in project management, stakeholder collaboration, and data-driven content strategy, I lead end-to-end production workflows from concept to delivery.
+                </p>
+                <p>
+                    My approach blends <span class="font-semibold pulsing-gradient-text">creative vision with analytical insight</span>, utilising audience data and performance metrics to optimise content and maximise engagement across diverse platforms, particularly social media. I thrive on delivering projects that not only meet but exceed objectives, resonating deeply with their intended audiences.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="section bg-opacity-50 py-20" style="background-color: #141414;">
+        <div class="container mx-auto px-6 md:px-12">
+            <h2 class="text-4xl font-bold text-center mb-4 text-white">My Approach</h2>
+            <div class="section-title-underline pulsing-gradient-bg"></div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                <div class="approach-card">
+                    <div class="text-4xl mb-4"><i class="fas fa-bullseye icon-yellow"></i></div>
+                    <h3 class="text-2xl font-semibold">Strategic Storytelling</h3>
+                    <p>Translating client goals into compelling visual narratives that captivate and convert.</p>
+                </div>
+                <div class="approach-card">
+                    <div class="text-4xl mb-4"><i class="fas fa-chart-line icon-yellow"></i></div>
+                    <h3 class="text-2xl font-semibold">Data-Driven Creativity</h3>
+                    <p>Utilising audience insights and analytics to inform creative concepts and refine content strategies.</p>
+                </div>
+                <div class="approach-card">
+                    <div class="text-4xl mb-4"><i class="fas fa-cogs icon-yellow"></i></div>
+                    <h3 class="text-2xl font-semibold">End-to-End Excellence</h3>
+                    <p>Managing the entire production lifecycle with meticulous attention to detail for impactful results.</p>
+                </div>
+                <div class="approach-card">
+                    <div class="text-4xl mb-4"><i class="fas fa-users icon-yellow"></i></div>
+                    <h3 class="text-2xl font-semibold">Collaborative Leadership</h3>
+                    <p>Building and directing high performing teams, fostering seamless collaboration for shared success.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="technical-expertise" class="section container mx-auto px-6 md:px-12">
+        <h2 class="text-4xl font-bold text-center mb-4 text-white">Technical Expertise</h2>
+        <div class="section-title-underline pulsing-gradient-bg"></div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-center max-w-4xl mx-auto">
+            <div class="technical-skill-card">
+                <div class="text-4xl mb-4"><i class="fas fa-video icon-yellow"></i></div>
+                <h3 class="text-xl font-semibold">Cinematography & DOP</h3>
+            </div>
+            <div class="technical-skill-card">
+                <div class="text-4xl mb-4"><i class="fas fa-cut icon-yellow"></i></div>
+                <h3 class="text-xl font-semibold">Video Editing</h3>
+            </div>
+            <div class="technical-skill-card">
+                <div class="text-4xl mb-4"><i class="fas fa-magic icon-yellow"></i></div>
+                <h3 class="text-xl font-semibold">Animation & Motion Graphics</h3>
+            </div>
+            <div class="technical-skill-card">
+                <div class="text-4xl mb-4"><i class="fas fa-bullhorn icon-yellow"></i></div>
+                <h3 class="text-xl font-semibold">Creative Direction</h3>
+            </div>
+            <div class="technical-skill-card">
+                <div class="text-4xl mb-4"><i class="fas fa-camera-retro icon-yellow"></i></div>
+                <h3 class="text-xl font-semibold">Filming & Production</h3>
+            </div>
+            <div class="technical-skill-card">
+                <div class="text-4xl mb-4"><i class="fas fa-tasks icon-yellow"></i></div>
+                <h3 class="text-xl font-semibold">Post-Production Workflow</h3>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="section bg-opacity-50 py-20" style="background-color: #141414;">
+        <div class="container mx-auto px-6 md:px-12">
+            <h2 class="text-4xl font-bold text-center mb-4 text-white">Portfolio</h2>
+            <div class="section-title-underline pulsing-gradient-bg"></div>
+            <p class="text-center text-xl mb-12 max-w-2xl mx-auto text-gray-300">
+                I've had the privilege of working on diverse projects that drive engagement and deliver results.
+                Explore my full range of work on Vimeo.
+            </p>
+            <div class="text-center mb-16">
+                <a href="https://vimeo.com/showcase/8483422" target="_blank" rel="noopener noreferrer" class="hero-button accent-bg text-lg">
+                    <i class="fab fa-vimeo-v mr-2"></i> Vimeo Showcase
+                </a>
+    </section>
+
+    <section id="contact" class="section container mx-auto px-6 md:px-12">
+        <h2 class="text-4xl font-bold text-center mb-4 text-white">Let's Connect</h2>
+        <div class="section-title-underline pulsing-gradient-bg"></div>
+        <div class="max-w-2xl mx-auto text-center">
+            <p class="text-xl mb-8 leading-relaxed text-gray-300">
+                I'm always excited to discuss new projects, collaborations, or opportunities.
+                If you're looking for a Senior Producer who can bring creative vision and strategic execution to your next venture, I'd love to hear from you.
+            </p>
+            <div class="hero-buttons-container"> 
+                <a href="mailto:alanabdurrahman98@gmail.com" class="hero-button accent-bg text-lg">
+                    <i class="fas fa-envelope mr-3"></i> Email Me
+                </a>
+                <a href="https://linkedin.com/in/alanabdurrahman" target="_blank" rel="noopener noreferrer" class="hero-button secondary-button text-lg">
+                    <i class="fab fa-linkedin mr-3"></i> LinkedIn Profile
+                </a>
+            </div>
+            <p class="mt-10 text-sm text-gray-500">
+            </p>
+        </div>
+    </section>
+
+    <footer style="background-color: #0A0A0A;" class="text-center py-8">
+        <p class="text-gray-500">&copy; <span id="currentYear"></span> Alan Abdurrahman. All Rights Reserved.</p>
+        <p class="text-gray-600 text-sm mt-1">Crafting Impactful Visual Stories from London.</p>
+    </footer>
+
+    <script>
+        // Typing Animation for Hero Title
+        const heroTitleElement = document.getElementById('hero-title');
+        const titles = ["Senior Producer", "Creative Strategist", "Visual Storyteller"];
+        let titleIndex = 0;
+        let charIndex = 0;
+        let currentTitle = '';
+        let isDeleting = false;
+
+        function type() {
+            const fullTitle = titles[titleIndex];
+            if (isDeleting) {
+                currentTitle = fullTitle.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                currentTitle = fullTitle.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            heroTitleElement.textContent = currentTitle;
+            let typeSpeed = isDeleting ? 50 : 100; 
+
+            if (!isDeleting && charIndex === fullTitle.length) {
+                typeSpeed = 1500; 
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                titleIndex = (titleIndex + 1) % titles.length;
+                typeSpeed = 300; 
+            }
+            setTimeout(type, typeSpeed);
+        }
+
+        // Scroll Animations for Sections
+        const sections = document.querySelectorAll('.section');
+        const observerOptions = {
+            root: null, 
+            rootMargin: '0px',
+            threshold: 0.1 
+        };
+        const sectionObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        sections.forEach(section => {
+            sectionObserver.observe(section);
+        });
+        
+        // Navigation bar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileMenuButton.querySelector('i');
+            if (mobileMenu.classList.contains('hidden')) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            }
+        });
+        
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                const icon = mobileMenuButton.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
+        // Particle Animation
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particlesArray;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = document.querySelector('.hero-section').offsetHeight; 
+        }
+        
+        class Particle {
+            constructor(x, y, directionX, directionY, size, color) {
+                this.x = x;
+                this.y = y;
+                this.directionX = directionX;
+                this.directionY = directionY;
+                this.size = size;
+                this.color = color;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+            update() {
+                if (this.x > canvas.width + this.size) { 
+                    this.x = -this.size;
+                    this.y = Math.random() * canvas.height;
+                } else if (this.x < -this.size) {
+                    this.x = canvas.width + this.size;
+                    this.y = Math.random() * canvas.height;
+                }
+                if (this.y > canvas.height + this.size) {
+                    this.y = -this.size;
+                    this.x = Math.random() * canvas.width;
+                } else if (this.y < -this.size) {
+                    this.y = canvas.height + this.size;
+                    this.x = Math.random() * canvas.width;
+                }
+
+                this.x += this.directionX;
+                this.y += this.directionY;
+                this.draw();
+            }
+        }
+
+        function initParticles() {
+            particlesArray = [];
+            let numberOfParticles = (canvas.height * canvas.width) / 12000; 
+            if (numberOfParticles > 70) numberOfParticles = 70; 
+            for (let i = 0; i < numberOfParticles; i++) {
+                let size = (Math.random() * 1.2) + 0.3; 
+                let x = Math.random() * canvas.width;
+                let y = Math.random() * canvas.height;
+                let directionX = (Math.random() * .3) - .15; 
+                let directionY = (Math.random() * .3) - .15;
+                
+                let color;
+                if (i < numberOfParticles / 3) { // Approximately 1/3 of particles
+                    color = 'rgba(250, 204, 21, 0.5)'; // Semi-transparent yellow/gold
+                } else {
+                    color = 'rgba(224, 224, 224, 0.25)'; // Existing light grey
+                }
+
+                particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+            }
+        }
+
+        function animateParticles() {
+            requestAnimationFrame(animateParticles);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+            }
+        }
+        
+        // Smooth scroll for the chevron link
+        const scrollDownLink = document.getElementById('scroll-down-link');
+        if (scrollDownLink) {
+            scrollDownLink.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent default jump
+                const targetId = this.getAttribute('href'); // Get #about
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            type(); 
+            resizeCanvas(); 
+            initParticles(); 
+            animateParticles(); 
+        });
+        window.addEventListener('resize', () => { 
+            resizeCanvas();
+            initParticles(); 
+        });
+
+    </script>
+</body>
+</html>
