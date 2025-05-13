@@ -32,7 +32,7 @@
             background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: pulseGradientAnimation 4s ease-in-out infinite;
-            font-weight: 500;
+            font-weight: 500; /* Default weight, can be overridden by font-bold for contact link */
         }
 
         .pulsing-gradient-bg {
@@ -57,7 +57,7 @@
             border: 2px solid transparent;
             position: relative;
             overflow: hidden;
-            cursor: pointer; /* Ensure cursor indicates clickable */
+            cursor: pointer;
         }
         .styled-button:hover {
             transform: scale(1.05);
@@ -75,7 +75,7 @@
             border: 2px solid #FFFFFF;
             background-color: #FACC15;
         }
-        .styled-button.accent-bg:hover .pulsing-gradient-text {
+        .styled-button.accent-bg:hover .pulsing-gradient-text { /* Should not be needed if button itself has bg */
             -webkit-text-fill-color: #0F0F0F;
             background-image: none;
         }
@@ -89,11 +89,12 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
-        .nav-link {
+        .nav-link { /* Base style for all nav links (desktop and mobile) */
             transition: color 0.3s ease;
-            color: #B0B0B0;
+            color: #B0B0B0; /* Default color for nav links */
             position: relative;
         }
+        /* Hover effect for regular desktop nav links (non-contact) */
         .nav-link:hover .nav-text-gradient {
             background: linear-gradient(45deg, #FDE047, #EAB308, #FDE047);
             background-size: 200% auto;
@@ -102,14 +103,34 @@
             -webkit-text-fill-color: transparent;
             animation: pulseGradientAnimation 4s ease-in-out infinite;
         }
+        /* Desktop Contact link specific style (boldness) */
+        .nav-link .contact-link-style {
+             font-weight: 700; /* Tailwind's font-bold is often 700 */
+        }
+
         .mobile-menu {
             background-color: rgba(15, 15, 15, 0.95);
             backdrop-filter: blur(10px);
         }
-        .mobile-menu a:hover {
-            background-color: #FFFFFF;
-            color: #0F0F0F;
+        /* Base style for mobile menu links */
+        .mobile-menu a.nav-link { /* Applying .nav-link class to mobile links too for consistency */
+            display: block;
+            padding: 0.75rem 1.5rem; /* Tailwind py-3 px-6 equivalent */
+            /* color: #B0B0B0; Inherited from .nav-link */
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
+        /* General hover for mobile menu links */
+        .mobile-menu a.nav-link:hover {
+            background-color: #FFFFFF;
+            color: #0F0F0F !important; /* Ensure text becomes dark */
+        }
+        /* Specific hover for mobile contact link to handle pulsing text */
+        .mobile-menu a.contact-link-mobile:hover .pulsing-gradient-text {
+            -webkit-text-fill-color: #0F0F0F; /* Change text to dark on hover */
+            background-image: none; /* Remove gradient on hover */
+            animation: none; /* Stop pulsing on hover */
+        }
+
 
         .section-title-underline {
             width: 80px;
@@ -121,14 +142,14 @@
         }
 
         .privacy-content h2 {
-            font-size: 1.75rem; /* 28px */
+            font-size: 1.75rem;
             font-weight: 600;
             color: #FFFFFF;
             margin-top: 2rem;
             margin-bottom: 0.75rem;
         }
         .privacy-content h3 {
-            font-size: 1.25rem; /* 20px */
+            font-size: 1.25rem;
             font-weight: 600;
             color: #FFFFFF;
             margin-top: 1.5rem;
@@ -143,7 +164,7 @@
             list-style-type: disc;
             margin-left: 1.5rem;
         }
-        .privacy-content a {
+        .privacy-content a { /* Links within the policy body */
             background: linear-gradient(45deg, #FDE047, #EAB308, #FDE047);
             background-size: 200% auto;
             -webkit-background-clip: text;
@@ -167,20 +188,19 @@
             color: #E0E0E0;
             padding: 1rem 1.5rem;
             z-index: 1000;
-            display: none; /* Initially hidden, shown by JS */
-            align-items: center; /* Default for larger screens */
-            justify-content: space-between; /* Default for larger screens */
+            display: none;
+            align-items: center;
+            justify-content: space-between;
             box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
             font-size: 0.9rem;
-            /* Flex behavior for responsiveness */
-            flex-direction: column; /* Stack items vertically on small screens */
-            text-align: center; /* Center text on small screens */
+            flex-direction: column;
+            text-align: center;
         }
         #cookie-banner p {
             margin: 0;
-            margin-bottom: 0.75rem; /* Space between text and button on small screens */
+            margin-bottom: 0.75rem;
         }
-        #cookie-banner a {
+        #cookie-banner a { /* Link within cookie banner text */
             background: linear-gradient(45deg, #FDE047, #EAB308, #FDE047);
             background-size: 200% auto;
             -webkit-background-clip: text;
@@ -191,18 +211,16 @@
             text-decoration: underline;
         }
 
-        /* Responsive adjustments for cookie banner */
-        @media (min-width: 640px) { /* sm breakpoint in Tailwind */
+        @media (min-width: 640px) {
             #cookie-banner {
-                flex-direction: row; /* Horizontal layout on larger screens */
-                text-align: left; /* Align text to left on larger screens */
+                flex-direction: row;
+                text-align: left;
             }
             #cookie-banner p {
-                margin-bottom: 0; /* Remove bottom margin */
-                margin-right: 1rem; /* Space before button on larger screens */
+                margin-bottom: 0;
+                margin-right: 1rem;
             }
         }
-
 
         .site-wrapper {
             display: flex;
@@ -218,7 +236,6 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-HB2CT1CCRZ');
     </script>
 </head>
@@ -234,7 +251,9 @@
                 <a href="index.html#experience" class="nav-link"><span class="nav-text-gradient">Approach</span></a>
                 <a href="index.html#technical-expertise" class="nav-link"><span class="nav-text-gradient">Expertise</span></a>
                 <a href="index.html#portfolio" class="nav-link"><span class="nav-text-gradient">Portfolio</span></a>
-                <a href="index.html#contact" class="nav-link"><span class="nav-text-gradient">Contact</span></a>
+                <a href="index.html#contact" class="nav-link">
+                    <span class="contact-link-style pulsing-gradient-text">Contact</span>
+                </a>
             </div>
             <div class="md:hidden">
                 <button id="mobile-menu-button" class="text-gray-300 focus:outline-none">
@@ -243,11 +262,13 @@
             </div>
         </div>
         <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 right-0 mobile-menu shadow-lg">
-            <a href="index.html#about" class="block py-3 px-6 text-gray-300">About</a>
-            <a href="index.html#experience" class="block py-3 px-6 text-gray-300">Approach</a>
-            <a href="index.html#technical-expertise" class="block py-3 px-6 text-gray-300">Expertise</a>
-            <a href="index.html#portfolio" class="block py-3 px-6 text-gray-300">Portfolio</a>
-            <a href="index.html#contact" class="block py-3 px-6 text-gray-300">Contact</a>
+            <a href="index.html#about" class="nav-link">About</a>
+            <a href="index.html#experience" class="nav-link">Approach</a>
+            <a href="index.html#technical-expertise" class="nav-link">Expertise</a>
+            <a href="index.html#portfolio" class="nav-link">Portfolio</a>
+            <a href="index.html#contact" class="nav-link contact-link-mobile">
+                <span class="font-bold pulsing-gradient-text">Contact</span>
+            </a>
         </div>
     </nav>
 
@@ -346,21 +367,24 @@
         </p>
     </footer>
 
-    <div id="cookie-banner"> <p>This website uses cookies, including Google Analytics, to enhance your experience and analyze site traffic. By clicking "Accept", you consent to our use of cookies. Read our <a href="privacy.html">Privacy Policy</a> for more details.</p>
+    <div id="cookie-banner">
+        <p>This website uses cookies, including Google Analytics, to enhance your experience and analyze site traffic. By clicking "Accept", you consent to our use of cookies. Read our <a href="privacy.html" class="pulsing-gradient-text">Privacy Policy</a> for more details.</p>
         <button id="accept-cookies" class="styled-button accent-bg">Accept</button>
     </div>
 
     <script>
         // Set current year in footer
-        document.getElementById('currentYearFooter').textContent = new Date().getFullYear();
-        // Note: The "lastUpdatedDate" in the policy content is manually set for now.
+        const currentYearFooterSpan = document.getElementById('currentYearFooter');
+        if (currentYearFooterSpan) {
+            currentYearFooterSpan.textContent = new Date().getFullYear();
+        }
+        // Note: The "lastUpdatedDate" in the policy content is manually set.
         // You should update it when you make significant changes to the policy text.
-        // Example: document.getElementById('lastUpdatedDate').textContent = "May 13, 2024";
 
 
-        // Navigation bar scroll effect (copied from your original script)
+        // Navigation bar scroll effect
         const navbar = document.getElementById('navbar');
-        if (navbar) { // Check if navbar exists on the page
+        if (navbar) {
             window.addEventListener('scroll', () => {
                 if (window.scrollY > 50) {
                     navbar.classList.add('scrolled');
@@ -371,22 +395,24 @@
         }
 
 
-        // Mobile Menu Toggle (copied from your original script)
+        // Mobile Menu Toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
 
-        if (mobileMenuButton && mobileMenu) { // Check if elements exist
-            const mobileMenuLinks = mobileMenu.querySelectorAll('a'); // Get links inside this specific menu
+        if (mobileMenuButton && mobileMenu) {
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a.nav-link'); // Target specific links with class
 
             mobileMenuButton.addEventListener('click', () => {
                 mobileMenu.classList.toggle('hidden');
                 const icon = mobileMenuButton.querySelector('i');
-                if (mobileMenu.classList.contains('hidden')) {
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                } else {
-                    icon.classList.remove('fa-bars');
-                    icon.classList.add('fa-times');
+                if (icon) { // Check if icon exists
+                    if (mobileMenu.classList.contains('hidden')) {
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    } else {
+                        icon.classList.remove('fa-bars');
+                        icon.classList.add('fa-times');
+                    }
                 }
             });
 
@@ -395,8 +421,10 @@
                     link.addEventListener('click', () => {
                         mobileMenu.classList.add('hidden');
                         const icon = mobileMenuButton.querySelector('i');
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
+                        if (icon) { // Check if icon exists
+                           icon.classList.remove('fa-times');
+                           icon.classList.add('fa-bars');
+                        }
                     });
                 });
             }
@@ -407,25 +435,20 @@
         const cookieBanner = document.getElementById('cookie-banner');
         const acceptCookiesButton = document.getElementById('accept-cookies');
 
-        // Function to show the banner
         function showCookieBanner() {
             if (cookieBanner) {
-                cookieBanner.style.display = 'flex'; // Or 'block' depending on your CSS
+                cookieBanner.style.display = 'flex';
             }
         }
 
-        // Function to hide the banner
         function hideCookieBanner() {
             if (cookieBanner) {
                 cookieBanner.style.display = 'none';
             }
         }
 
-        // Check if consent was already given
         if (localStorage.getItem('cookieConsentAccepted') === 'true') {
             hideCookieBanner();
-            // If consent already given, you could also trigger GA or other cookie-dependent scripts here if they weren't loaded by default.
-            // For this setup, gtag loads regardless, but banner is hidden.
         } else {
             showCookieBanner();
         }
@@ -434,20 +457,8 @@
             acceptCookiesButton.addEventListener('click', () => {
                 localStorage.setItem('cookieConsentAccepted', 'true');
                 hideCookieBanner();
-                // Optionally, trigger GA event or specific function upon consent
-                // if (typeof gtag === 'function') {
-                //     gtag('event', 'cookie_consent_accepted');
-                // }
             });
         }
-
-        // IMPORTANT: Google Analytics (gtag.js) is currently set to load regardless of cookie consent
-        // in this example (it's in the <head>). For stricter compliance (e.g., GDPR),
-        // you might need to prevent gtag('config', 'G-HB2CT1CCRZ') from running until
-        // after the user clicks "Accept". This often involves more complex script loading logic
-        // or using a Consent Management Platform.
-        // The current setup informs the user and gets consent for "cookies" generally,
-        // and the policy explains Google Analytics is used.
     </script>
 </body>
 </html>
