@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Alan Abdurrahman</title>
+    <meta name="description" content="Privacy Policy for the website of Alan Abdurrahman.">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0F0F0F;
+            color: #E0E0E0;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        @keyframes pulseGradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .pulsing-gradient-text {
+            background: linear-gradient(45deg, #FDE047, #EAB308, #FDE047);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulseGradientAnimation 4s ease-in-out infinite;
+            font-weight: 500;
+        }
+
+        .pulsing-gradient-bg {
+            background: linear-gradient(45deg, #FDE047, #EAB308, #FDE047);
+            background-size: 200% auto;
+            animation: pulseGradientAnimation 4s ease-in-out infinite;
+            box-shadow: 0 0 8px rgba(250, 204, 21, 0.3);
+        }
+
+        .styled-button {
+            padding: 0.6rem 1.2rem;
+            min-width: 120px;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transform-origin: center;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer; /* Ensure cursor indicates clickable */
+        }
+        .styled-button:hover {
+            transform: scale(1.05);
+            background-color: #FFFFFF;
+            color: #0F0F0F !important;
+            border-color: #FFFFFF;
+            background-image: none !important;
+            box-shadow: 0 6px 12px rgba(255,255,255,0.1);
+        }
+        .styled-button.accent-bg {
+            background-image: linear-gradient(45deg, #FDE047, #EAB308, #FDE047);
+            background-size: 200% auto;
+            animation: pulseGradientAnimation 4s ease-in-out infinite;
+            color: #0F0F0F;
+            border: 2px solid #FFFFFF;
+            background-color: #FACC15;
+        }
+        .styled-button.accent-bg:hover .pulsing-gradient-text {
+            -webkit-text-fill-color: #0F0F0F;
+            background-image: none;
+        }
+
+        nav {
+            transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        nav.scrolled {
+            background-color: rgba(15, 15, 15, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .nav-link {
+            transition: color 0.3s ease;
+            color: #B0B0B0;
+            position: relative;
+        }
+        .nav-link:hover .nav-text-gradient {
+            background: linear-gradient(45deg, #FDE047, #EAB308, #FDE047);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulseGradientAnimation 4s ease-in-out infinite;
+        }
+        .mobile-menu {
+            background-color: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        .mobile-menu a:hover {
+            background-color: #FFFFFF;
+            color: #0F0F0F;
+        }
+
+        .section-title-underline {
+            width: 80px;
+            height: 2px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 2rem;
+            border-radius: 1px;
+        }
+
+        .privacy-content h2 {
+            font-size: 1.75rem; /* 28px */
+            font-weight: 600;
+            color: #FFFFFF;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+        }
+        .privacy-content h3 {
+            font-size: 1.25rem; /* 20px */
+            font-weight: 600;
+            color: #FFFFFF;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .privacy-content p, .privacy-content ul {
+            color: #B0B0B0;
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+        .privacy-content ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+        }
+        .privacy-content a {
+            background: linear-gradient(45deg, #FDE047, #EAB308, #FDE047);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulseGradientAnimation 4s ease-in-out infinite;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        .privacy-content a:hover {
+            text-decoration: underline;
+        }
+
+        #cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(28, 28, 28, 0.95);
+            backdrop-filter: blur(8px);
+            color: #E0E0E0;
+            padding: 1rem 1.5rem;
+            z-index: 1000;
+            display: none; /* Initially hidden, shown by JS */
+            align-items: center; /* Default for larger screens */
+            justify-content: space-between; /* Default for larger screens */
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+            font-size: 0.9rem;
+            /* Flex behavior for responsiveness */
+            flex-direction: column; /* Stack items vertically on small screens */
+            text-align: center; /* Center text on small screens */
+        }
+        #cookie-banner p {
+            margin: 0;
+            margin-bottom: 0.75rem; /* Space between text and button on small screens */
+        }
+        #cookie-banner a {
+            background: linear-gradient(45deg, #FDE047, #EAB308, #FDE047);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulseGradientAnimation 4s ease-in-out infinite;
+            font-weight: 500;
+            text-decoration: underline;
+        }
+
+        /* Responsive adjustments for cookie banner */
+        @media (min-width: 640px) { /* sm breakpoint in Tailwind */
+            #cookie-banner {
+                flex-direction: row; /* Horizontal layout on larger screens */
+                text-align: left; /* Align text to left on larger screens */
+            }
+            #cookie-banner p {
+                margin-bottom: 0; /* Remove bottom margin */
+                margin-right: 1rem; /* Space before button on larger screens */
+            }
+        }
+
+
+        .site-wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .site-content {
+            flex-grow: 1;
+        }
+    </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HB2CT1CCRZ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-HB2CT1CCRZ');
+    </script>
+</head>
+<body class="antialiased site-wrapper">
+
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 p-4">
+        <div class="container mx-auto flex justify-between items-center px-4 md:px-0">
+            <a href="index.html" class="text-2xl font-bold tracking-tight text-white">
+                Alan<span class="nav-logo-dot pulsing-gradient-text">.</span>
+            </a>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html#about" class="nav-link"><span class="nav-text-gradient">About</span></a>
+                <a href="index.html#experience" class="nav-link"><span class="nav-text-gradient">Approach</span></a>
+                <a href="index.html#technical-expertise" class="nav-link"><span class="nav-text-gradient">Expertise</span></a>
+                <a href="index.html#portfolio" class="nav-link"><span class="nav-text-gradient">Portfolio</span></a>
+                <a href="index.html#contact" class="nav-link"><span class="nav-text-gradient">Contact</span></a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-300 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 right-0 mobile-menu shadow-lg">
+            <a href="index.html#about" class="block py-3 px-6 text-gray-300">About</a>
+            <a href="index.html#experience" class="block py-3 px-6 text-gray-300">Approach</a>
+            <a href="index.html#technical-expertise" class="block py-3 px-6 text-gray-300">Expertise</a>
+            <a href="index.html#portfolio" class="block py-3 px-6 text-gray-300">Portfolio</a>
+            <a href="index.html#contact" class="block py-3 px-6 text-gray-300">Contact</a>
+        </div>
+    </nav>
+
+    <main class="site-content">
+        <section id="privacy-policy-content" class="section container mx-auto px-6 md:px-12 py-24 md:py-32 privacy-content">
+            <h1 class="text-4xl font-bold text-center mb-4 text-white">Privacy Policy</h1>
+            <div class="section-title-underline pulsing-gradient-bg mx-auto"></div>
+
+            <p class="text-center text-gray-400 mb-10">Last updated: <span id="lastUpdatedDate">May 13, 2024</span></p> <p>Alan Abdurrahman ("I", "me", "my") operates the website alanabdurrahman.com (hereinafter referred to as the "Service"). This page informs you of my policies regarding the collection, use, and disclosure of personal data when you use my Service and the choices you have associated with that data.</p>
+            <p>I use your data to provide and improve the Service. By using the Service, you agree to the collection and use of information in accordance with this policy.</p>
+
+            <h2>Information Collection and Use</h2>
+            <p>I collect several different types of information for various purposes to provide and improve my Service to you.</p>
+
+            <h3>Types of Data Collected</h3>
+            <h4>Personal Data</h4>
+            <p>While using my Service, I may ask you to provide me with certain personally identifiable information that can be used to contact or identify you ("Personal Data"). Personally identifiable information may include, but is not limited to:</p>
+            <ul>
+                <li>Email address (if you contact me directly via the provided email link)</li>
+                <li>First name and last name (if you provide it in correspondence)</li>
+                <li>Cookies and Usage Data</li>
+            </ul>
+
+            <h4>Usage Data</h4>
+            <p>I may also collect information on how the Service is accessed and used ("Usage Data"). This Usage Data may include information such as your computer's Internet Protocol address (e.g. IP address), browser type, browser version, the pages of my Service that you visit, the time and date of your visit, the time spent on those pages, unique device identifiers and other diagnostic data.</p>
+            <p>This site uses Google Analytics to collect Usage Data. Google Analytics is a web analytics service offered by Google that tracks and reports website traffic. Google uses the data collected to track and monitor the use of our Service. This data is shared with other Google services. Google may use the collected data to contextualize and personalize the ads of its own advertising network. For more information on the privacy practices of Google, please visit the Google Privacy & Terms web page: <a href="https://policies.google.com/privacy?hl=en" target="_blank" rel="noopener noreferrer">https://policies.google.com/privacy?hl=en</a>. You can opt-out of having made your activity on the Service available to Google Analytics by installing the Google Analytics opt-out browser add-on.</p>
+
+            <h2>Use of Data</h2>
+            <p>Alan Abdurrahman uses the collected data for various purposes:</p>
+            <ul>
+                <li>To provide and maintain the Service</li>
+                <li>To monitor the usage of the Service (via Google Analytics)</li>
+                <li>To detect, prevent and address technical issues</li>
+                <li>To respond to your inquiries if you contact me directly</li>
+            </ul>
+
+            <h2>Cookies and Tracking Technologies</h2>
+            <p>I use cookies and similar tracking technologies to track the activity on my Service and hold certain information. Cookies are files with a small amount of data which may include an anonymous unique identifier. Cookies are sent to your browser from a website and stored on your device. My primary use of cookies is through Google Analytics, as described above.</p>
+            <p>The cookie banner on this site requests your consent for the use of cookies. If you accept, Google Analytics cookies will be used. If you do not accept, or if you configure your browser to refuse cookies, some functionalities related to analytics might be limited, but the core website content will remain accessible.</p>
+            <p>You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, you may not be able to use some portions of my Service optimally. For more information on managing cookies, please refer to your browser's help documentation.</p>
+            <p>Examples of Cookies potentially used:</p>
+            <ul>
+                <li><strong>Analytics Cookies (Google Analytics):</strong> These cookies are used to collect information about how visitors use my website. I use the information to compile reports and to help me improve the website. The cookies collect information in an anonymous form, including the number of visitors to the website, where visitors have come to the website from and the pages they visited.</li>
+                <li><strong>Consent Cookie:</strong> A cookie may be used to remember your cookie consent preference.</li>
+            </ul>
+
+            <h2>Data Sharing and Disclosure</h2>
+            <p>I do not sell your Personal Data. I may share non-personally identifiable Usage Data with Google Analytics as described above.</p>
+            <h3>Legal Requirements</h3>
+            <p>Alan Abdurrahman may disclose your Personal Data if required to do so by law or in the good faith belief that such action is necessary to:</p>
+            <ul>
+                <li>To comply with a legal obligation</li>
+                <li>To protect and defend the rights or property of Alan Abdurrahman</li>
+                <li>To prevent or investigate possible wrongdoing in connection with the Service</li>
+                <li>To protect the personal safety of users of the Service or the public</li>
+                <li>To protect against legal liability</li>
+            </ul>
+
+            <h2>Data Security</h2>
+            <p>The security of your data is important to me. I use HTTPS to encrypt data transmitted between your browser and my website. However, remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While I strive to use commercially acceptable means to protect your Personal Data, I cannot guarantee its absolute security.</p>
+
+            <h2>Your Data Protection Rights</h2>
+            <p>Depending on your location (e.g., if you are in the UK or European Economic Area), you have certain data protection rights, including:</p>
+            <ul>
+                <li>The right to access, update or to delete the information I have on you.</li>
+                <li>The right of rectification.</li>
+                <li>The right to object.</li>
+                <li>The right of restriction.</li>
+                <li>The right to data portability.</li>
+                <li>The right to withdraw consent.</li>
+            </ul>
+            <p>If you wish to exercise any of these rights, please contact me using the email address provided below. Please note that I may ask you to verify your identity before responding to such requests.</p>
+
+            <h2>Links to Other Sites</h2>
+            <p>My Service may contain links to other sites that are not operated by me (e.g., Vimeo, LinkedIn, Google). If you click on a third party link, you will be directed to that third party's site. I strongly advise you to review the Privacy Policy of every site you visit. I have no control over and assume no responsibility for the content, privacy policies or practices of any third party sites or services.</p>
+
+            <h2>Children's Privacy</h2>
+            <p>My Service does not address anyone under the age of 18 ("Children"). I do not knowingly collect personally identifiable information from anyone under the age of 18. If you are a parent or guardian and you are aware that your Child has provided me with Personal Data, please contact me. If I become aware that I have collected Personal Data from children without verification of parental consent, I take steps to remove that information from my servers.</p>
+
+            <h2>Changes to This Privacy Policy</h2>
+            <p>I may update my Privacy Policy from time to time. I will notify you of any changes by posting the new Privacy Policy on this page and updating the "last updated" date at the top of this Privacy Policy. You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
+
+            <h2>Contact Me</h2>
+            <p>If you have any questions about this Privacy Policy, please contact me:</p>
+            <ul>
+                <li>By email: <a href="mailto:alanabdurrahman98@gmail.com">alanabdurrahman98@gmail.com</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer style="background-color: #0A0A0A;" class="text-center py-8">
+        <p class="text-gray-500">&copy; <span id="currentYearFooter"></span> Alan Abdurrahman. All Rights Reserved.</p>
+        <p class="text-gray-600 text-sm mt-1">Crafting Impactful Visual Stories from London.</p>
+        <p class="text-gray-600 text-xs mt-2">
+            <a href="privacy.html" class="hover:underline pulsing-gradient-text">Privacy Policy</a>
+        </p>
+    </footer>
+
+    <div id="cookie-banner"> <p>This website uses cookies, including Google Analytics, to enhance your experience and analyze site traffic. By clicking "Accept", you consent to our use of cookies. Read our <a href="privacy.html">Privacy Policy</a> for more details.</p>
+        <button id="accept-cookies" class="styled-button accent-bg">Accept</button>
+    </div>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('currentYearFooter').textContent = new Date().getFullYear();
+        // Note: The "lastUpdatedDate" in the policy content is manually set for now.
+        // You should update it when you make significant changes to the policy text.
+        // Example: document.getElementById('lastUpdatedDate').textContent = "May 13, 2024";
+
+
+        // Navigation bar scroll effect (copied from your original script)
+        const navbar = document.getElementById('navbar');
+        if (navbar) { // Check if navbar exists on the page
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+        }
+
+
+        // Mobile Menu Toggle (copied from your original script)
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileMenuButton && mobileMenu) { // Check if elements exist
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a'); // Get links inside this specific menu
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                const icon = mobileMenuButton.querySelector('i');
+                if (mobileMenu.classList.contains('hidden')) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                } else {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                }
+            });
+
+            if (mobileMenuLinks) {
+                mobileMenuLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.add('hidden');
+                        const icon = mobileMenuButton.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    });
+                });
+            }
+        }
+
+
+        // Cookie Banner Logic
+        const cookieBanner = document.getElementById('cookie-banner');
+        const acceptCookiesButton = document.getElementById('accept-cookies');
+
+        // Function to show the banner
+        function showCookieBanner() {
+            if (cookieBanner) {
+                cookieBanner.style.display = 'flex'; // Or 'block' depending on your CSS
+            }
+        }
+
+        // Function to hide the banner
+        function hideCookieBanner() {
+            if (cookieBanner) {
+                cookieBanner.style.display = 'none';
+            }
+        }
+
+        // Check if consent was already given
+        if (localStorage.getItem('cookieConsentAccepted') === 'true') {
+            hideCookieBanner();
+            // If consent already given, you could also trigger GA or other cookie-dependent scripts here if they weren't loaded by default.
+            // For this setup, gtag loads regardless, but banner is hidden.
+        } else {
+            showCookieBanner();
+        }
+
+        if (acceptCookiesButton) {
+            acceptCookiesButton.addEventListener('click', () => {
+                localStorage.setItem('cookieConsentAccepted', 'true');
+                hideCookieBanner();
+                // Optionally, trigger GA event or specific function upon consent
+                // if (typeof gtag === 'function') {
+                //     gtag('event', 'cookie_consent_accepted');
+                // }
+            });
+        }
+
+        // IMPORTANT: Google Analytics (gtag.js) is currently set to load regardless of cookie consent
+        // in this example (it's in the <head>). For stricter compliance (e.g., GDPR),
+        // you might need to prevent gtag('config', 'G-HB2CT1CCRZ') from running until
+        // after the user clicks "Accept". This often involves more complex script loading logic
+        // or using a Consent Management Platform.
+        // The current setup informs the user and gets consent for "cookies" generally,
+        // and the policy explains Google Analytics is used.
+    </script>
+</body>
+</html>
