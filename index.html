@@ -280,17 +280,17 @@
             background-color: rgba(15, 15, 15, 0.95);
             backdrop-filter: blur(10px);
         }
-        .mobile-menu a { /* Base style for mobile menu links */
-            display: block; /* Ensure block display for padding and full-width click */
+        .mobile-menu a.nav-link { /* Applying .nav-link class to mobile links too for consistency */
+            display: block;
             padding: 0.75rem 1.5rem; /* Tailwind py-3 px-6 equivalent */
-            color: #B0B0B0; /* Default text color for mobile links */
+            /* color: #B0B0B0; Inherited from .nav-link */
             transition: background-color 0.3s ease, color 0.3s ease;
         }
-        .mobile-menu a:hover {
+        .mobile-menu a.nav-link:hover {
             background-color: #FFFFFF;
-            color: #0F0F0F !important; /* Important to override pulsing gradient on hover if not desired */
+            color: #0F0F0F !important; /* Ensure text becomes dark */
         }
-        /* Specific hover for mobile contact link if it has pulsing text */
+        /* Specific hover for mobile contact link to handle pulsing text */
         .mobile-menu a.contact-link-mobile:hover .pulsing-gradient-text {
             -webkit-text-fill-color: #0F0F0F; /* Change text to dark on hover */
             background-image: none; /* Remove gradient on hover */
@@ -422,7 +422,7 @@
             transition: color 0.3s ease, text-shadow 0.3s ease;
         }
 
-        /* Styles for Cookie Banner - Copied from privacy.html */
+        /* Styles for Cookie Banner */
         #cookie-banner {
             position: fixed;
             bottom: 0;
@@ -469,7 +469,6 @@
         }
 
         /* Button style for Cookie Banner Accept - .styled-button and .accent-bg are used */
-        /* Ensuring .styled-button is defined if it wasn't global, or enhancing it */
         .styled-button { /* This class is for the accept button on the cookie banner */
             padding: 0.6rem 1.2rem;
             min-width: 120px;
@@ -487,17 +486,18 @@
             overflow: hidden;
             cursor: pointer;
         }
-        /* .hero-button already has hover styles, .styled-button can inherit or have its own if different */
         /* .accent-bg is already defined and provides the yellow gradient background */
 
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-HB2CT1CCRZ"></script>
     <script>
+      // Initialize dataLayer and gtag function
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+      gtag('js', new Date()); // This part is okay to run on load, it prepares gtag
 
-      gtag('config', 'G-HB2CT1CCRZ');
+      // IMPORTANT: gtag('config', 'G-HB2CT1CCRZ') is now called conditionally
+      // based on cookie consent. See the script at the bottom of the body.
     </script>
 </head>
 <body class="antialiased">
@@ -754,7 +754,7 @@
         const mobileMenu = document.getElementById('mobile-menu');
 
         if (mobileMenuButton && mobileMenu) { // Check if elements exist
-            const mobileMenuLinks = mobileMenu.querySelectorAll('a'); // Corrected to query within mobileMenu
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a.nav-link'); // Target specific links
             mobileMenuButton.addEventListener('click', () => {
                 mobileMenu.classList.toggle('hidden');
                 const icon = mobileMenuButton.querySelector('i');
@@ -909,7 +909,20 @@
             }
         });
 
-        // ADDED: Cookie Banner Logic
+        // --- Google Analytics Configuration Function ---
+        // This function will be called once consent is given.
+        function initializeGoogleAnalytics() {
+            if (typeof gtag === 'function') {
+                gtag('config', 'G-HB2CT1CCRZ');
+                // You can also log an event here if you want to track consent itself in GA
+                // gtag('event', 'consent_given', { 'event_category': 'cookie_consent', 'event_label': 'accepted' });
+                console.log("Google Analytics configured after consent.");
+            } else {
+                console.error("gtag function not found. Google Analytics may not be loaded correctly.");
+            }
+        }
+
+        // Cookie Banner Logic
         const cookieBanner = document.getElementById('cookie-banner');
         const acceptCookiesButton = document.getElementById('accept-cookies');
 
@@ -930,8 +943,9 @@
         // Check if consent was already given when the page loads
         if (localStorage.getItem('cookieConsentAccepted') === 'true') {
             hideCookieBanner();
+            initializeGoogleAnalytics(); // Initialize GA if consent was already given
         } else {
-            showCookieBanner();
+            showCookieBanner(); // Otherwise, show the banner to ask for consent
         }
 
         // Add event listener to the accept button
@@ -939,10 +953,7 @@
             acceptCookiesButton.addEventListener('click', () => {
                 localStorage.setItem('cookieConsentAccepted', 'true');
                 hideCookieBanner();
-                // Optional: You could trigger a Google Analytics event here if needed
-                // if (typeof gtag === 'function') {
-                //     gtag('event', 'cookie_consent_accepted');
-                // }
+                initializeGoogleAnalytics(); // Initialize GA now that consent has been given
             });
         }
     </script>
