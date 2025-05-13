@@ -233,10 +233,13 @@
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-HB2CT1CCRZ"></script>
     <script>
+      // Initialize dataLayer and gtag function
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-HB2CT1CCRZ');
+      gtag('js', new Date()); // This part is okay to run on load, it prepares gtag
+
+      // IMPORTANT: gtag('config', 'G-HB2CT1CCRZ') is now called conditionally
+      // based on cookie consent. See the script at the bottom of the body.
     </script>
 </head>
 <body class="antialiased site-wrapper">
@@ -378,9 +381,19 @@
         if (currentYearFooterSpan) {
             currentYearFooterSpan.textContent = new Date().getFullYear();
         }
-        // Note: The "lastUpdatedDate" in the policy content is manually set.
-        // You should update it when you make significant changes to the policy text.
 
+        // --- Google Analytics Configuration Function ---
+        // This function will be called once consent is given.
+        function initializeGoogleAnalytics() {
+            if (typeof gtag === 'function') {
+                gtag('config', 'G-HB2CT1CCRZ');
+                // You can also log an event here if you want to track consent itself in GA
+                // gtag('event', 'consent_given', { 'event_category': 'cookie_consent', 'event_label': 'accepted' });
+                console.log("Google Analytics configured after consent.");
+            } else {
+                console.error("gtag function not found. Google Analytics may not be loaded correctly.");
+            }
+        }
 
         // Navigation bar scroll effect
         const navbar = document.getElementById('navbar');
@@ -394,18 +407,17 @@
             });
         }
 
-
         // Mobile Menu Toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
 
         if (mobileMenuButton && mobileMenu) {
-            const mobileMenuLinks = mobileMenu.querySelectorAll('a.nav-link'); // Target specific links with class
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a.nav-link');
 
             mobileMenuButton.addEventListener('click', () => {
                 mobileMenu.classList.toggle('hidden');
                 const icon = mobileMenuButton.querySelector('i');
-                if (icon) { // Check if icon exists
+                if (icon) {
                     if (mobileMenu.classList.contains('hidden')) {
                         icon.classList.remove('fa-times');
                         icon.classList.add('fa-bars');
@@ -421,7 +433,7 @@
                     link.addEventListener('click', () => {
                         mobileMenu.classList.add('hidden');
                         const icon = mobileMenuButton.querySelector('i');
-                        if (icon) { // Check if icon exists
+                        if (icon) {
                            icon.classList.remove('fa-times');
                            icon.classList.add('fa-bars');
                         }
@@ -429,7 +441,6 @@
                 });
             }
         }
-
 
         // Cookie Banner Logic
         const cookieBanner = document.getElementById('cookie-banner');
@@ -447,16 +458,19 @@
             }
         }
 
+        // Check if consent was already given
         if (localStorage.getItem('cookieConsentAccepted') === 'true') {
             hideCookieBanner();
+            initializeGoogleAnalytics(); // Initialize GA if consent was already given
         } else {
-            showCookieBanner();
+            showCookieBanner(); // Otherwise, show the banner to ask for consent
         }
 
         if (acceptCookiesButton) {
             acceptCookiesButton.addEventListener('click', () => {
                 localStorage.setItem('cookieConsentAccepted', 'true');
                 hideCookieBanner();
+                initializeGoogleAnalytics(); // Initialize GA now that consent has been given
             });
         }
     </script>
